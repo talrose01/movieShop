@@ -32,7 +32,6 @@ app.controller('cartController', ['UserService','$route','openPageService','loca
 
     ctrl.removeMovie=function (movieId) {
         localStorageService.remove(movieId.substring(7));
-
         $window.alert("movie removed");
         $route.reload();
     }
@@ -73,7 +72,7 @@ app.controller('cartController', ['UserService','$route','openPageService','loca
         var obj={};
         obj.orderId=productId;
         $http.post("http://localhost:3000/orders/getOrderDetails", obj).then(function (response){
-            console.log(response.data)
+            console.log(response.data);
             ctrl.details=response.data;
         })
         ctrl.showDetailsModal=true;
@@ -99,11 +98,7 @@ app.controller('cartController', ['UserService','$route','openPageService','loca
     ctrl.buyCart = function () {
         var orderToInsert={};
         orderToInsert.UserName=UserService.userName.substring(0,UserService.userName.length-11);
-        console.log('$scope.userName.substring(0,$scope.userName.length-11)')
-        console.log(UserService.userName)
-        console.log(orderToInsert.UserName)
-        console.log(UserService.userName.substring(0,UserService.userName.length-11))
-        var currentdate= new Date();
+              var currentdate= new Date();
         //********order month*******************
         var curMonth=currentdate.getMonth()+1;
         var newMonth=parseInt(curMonth);
@@ -144,23 +139,22 @@ app.controller('cartController', ['UserService','$route','openPageService','loca
         orderToInsert.totalPrice= $scope.myFieldLabel;
         orderToInsert.movieList=order;
         var orderDitails="Your OrderDetails: ";
-        self.message=[];
-        self.requestedUrl="http://localhost:3000/orders/addOrder";
-        /*JASON.stringify(orderToInsert)*/
+        /*ctrl.message=[];*/
         $http.post("http://localhost:3000/orders/addOrder",orderToInsert).then(function (response){
-            ctrl.message=response.data
+            ctrl.message=response.data;
 
             for (var j = 0; j <ctrl.message.length; j++){
                 orderDitails=orderDitails+"\norderId: "+(ctrl.message[j]).orderId+"\nUserName: "+(ctrl.message[j]).UserName+"\norderDate: "+(ctrl.message[j]).orderDate.substring(0,10)+"\nshipmentDate:2017-09-10"+"\nDollar: "+(ctrl.message[j]).Dollar+"\ntotalPrice: "+(ctrl.message[j]).totalPrice;
 
 
             }
-
+            $scope.myFieldLabel='0';
+            console.log('$scope.myFieldLabel console.log($scope.myFieldLabel)')
+            console.log($scope.myFieldLabel)
+                $window.alert(orderDitails)
             localStorage.clear();
             ctrl.products=[];
-            // window.location.reload();
-            //$route.reload();
-            $window.alert(orderDitails)
+
         },function (error) {console.error('error');});
 
     }

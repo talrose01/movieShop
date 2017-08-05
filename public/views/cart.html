@@ -20,7 +20,7 @@
                                 <p>Quantity:{{cartController.products[$index].quantity}}</p>
                                 <br>
                                 <br>
-                                <button ng-click="cartController.removeMovie(cartController.products[$index].movieId,cartController.products[$index].movieId);">remove</button>
+                                <button ng-click="cartController.removeMovie(cartController.products[$index].movieId);">remove</button>
                             </td>
                             <td>
                                 <img class="movieImg" ng-src="{{cartController.products[$index].picturePath}}">
@@ -38,7 +38,7 @@
                                 <p>Quantity:{{cartController.products[$index+1].quantity}}</p>
                                 <br>
                                 <br>
-                                <button ng-click="cartController.removeMovie(cartController.products[$index+1].movieId,cartController.products[$index+1].movieId);">remove</button>
+                                <button ng-click="cartController.removeMovie(cartController.products[$index+1].movieId);">remove</button>
                             </td>
                             <td>
                                 <img class="movieImg" ng-src="{{cartController.products[$index+1].picturePath}}">
@@ -56,7 +56,7 @@
                                 <p>Quantity:{{cartController.products[$index+2].quantity}}</p>
                                 <br>
                                 <br>
-                                <button ng-click="cartController.removeMovie(cartController.products[$index+2].movieId,cartController.products[$index+2].movieId);">remove</button>
+                                <button ng-click="cartController.removeMovie(cartController.products[$index+2].movieId);">remove</button>
                             </td>
                             <td>
                                 <img class="movieImg" ng-src="{{cartController.products[$index+2].picturePath}}">
