@@ -139,7 +139,7 @@ app.controller('cartController', ['UserService','$route','openPageService','loca
         orderToInsert.totalPrice= $scope.myFieldLabel;
         orderToInsert.movieList=order;
         var orderDitails="Your OrderDetails: ";
-        /*ctrl.message=[];*/
+
         $http.post("http://localhost:3000/orders/addOrder",orderToInsert).then(function (response){
             ctrl.message=response.data;
 
@@ -149,8 +149,7 @@ app.controller('cartController', ['UserService','$route','openPageService','loca
 
             }
             $scope.myFieldLabel='0';
-            console.log('$scope.myFieldLabel console.log($scope.myFieldLabel)')
-            console.log($scope.myFieldLabel)
+
                 $window.alert(orderDitails)
             localStorage.clear();
             ctrl.products=[];
