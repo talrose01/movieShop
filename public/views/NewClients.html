@@ -1,0 +1,97 @@
+<div class="register-container" ng-controller="registerCtrl as registerCtrl" data-ng-init="registerCtrl.getCategories();">
+    <div class="register-form" >
+        <!--  ng-submit="registerCtrl.register()"-->
+        <form id="registerForm" name="registerForm" >
+
+            <div class="container" >
+                <label><b>Username</b></label>
+                <input type="text" pattern="[a-zA-Z]+" ng-model="userName" placeholder="Enter Username" minlength="3"
+                       maxlength="8" name="userName" required>
+                <span ng-show="registerForm.userName.$error.pattern || registerForm.userName.$error.required||registerForm.userName.$error.minlength||registerForm.userName.$error.maxlength">Username must be between 3-8 characters (letters only)</span>
+                <br>
+                <label><b>City</b></label>
+                <input type="text" ng-model="city" placeholder="Enter City" name="city" required>
+                <span ng-show="registerForm.city.$error.required">City is required</span>
+                <br>
+                <label><b>Password</b></label>
+                <input type="password" pattern="^[a-zA-Z0-9]+$" placeholder="Enter Password" ng-model="password" minlength="5"
+                       maxlength="10" name="password" required>
+                <span ng-show="registerForm.password.$error.pattern || registerForm.password.$error.required || registerForm.password.$error.minlength||registerForm.password.$error.maxlength">password is required. must be 5-10 characters</span>
+                <br>
+                <label><b>Email</b></label>
+                <input type="text" ng-model="email" placeholder="Enter email" name="email" required>
+                <span ng-show="registerForm.email.$error.required || registerForm.email.$error.email">email is required</span>
+                <br>
+                <label><b>Country</b></label>
+                       <input type="text" ng-model="country" placeholder="Enter Country" name="country" required>
+                       <span ng-show="registerForm.country.$error.required">Country is required</span>
+               <!-- <select ng-model="selectedCountry" ng-options="c for c in countries"> </select>
+               --> <br>
+                <label><b>Address</b></label>
+                <input type="text" ng-model="address" placeholder="Enter Address" name="address" required>
+                <span ng-show="registerForm.address.$error.required">Address is required</span>
+                <br>
+                <label><b>Phone</b></label>
+                <input type="text" pattern="^[0-9]*$" ng-model="phone" placeholder="Enter Phone" name="phone" required>
+                <span ng-show="registerForm.phone.$error.required || registerForm.phone.$error.pattern">Phone is required(only numbers)</span>
+                <br>
+                <label><b>First Name</b></label>
+                <input type="text" ng-model="firstName" placeholder="Enter FirstName" name="firstName" required>
+                <span ng-show="registerForm.firstName.$error.required">First Name is required</span>
+                <br>
+                <label><b>Last Name</b></label>
+                <input type="text" ng-model="lastName" placeholder="Enter Last Name" name="lastName" required>
+                <span ng-show="registerForm.lastName.$error.required">Last Name is required</span>
+                <br>
+                <label><b>Credit Card Number</b></label>
+                <input type="text" ng-model="creditCardNumber" placeholder="Enter Credit Card Number" name="creditCardNumber"
+                       required>
+                <span ng-show="registerForm.creditCardNumber.$error.required|| registerForm.creditCardNumber.$error.pattern">Credit Card Number is required</span>
+                <br>
+                <label><b>Is Admin?</b></label>
+                <input type="text" ng-model="admin" placeholder="Enter if Admin" name="admin"
+                       required>
+                <span ng-show="registerForm.creditCardNumber.$error.required|| registerForm.creditCardNumber.$error.pattern">Credit Card Number is required</span>
+                <br>
+                <label><b>Question 1</b></label>
+                <input type="text" ng-model="question1" placeholder="Enter question 1" name="question1" required>
+                <span ng-show="registerForm.question1.$error.required">question 1 is required</span>
+                <br>
+                <label><b>Answer 1</b></label>
+                <input type="text" ng-model="answer1" placeholder="Enter answer 1" name="answer1" required>
+                <span ng-show="registerForm.question1.$error.required">answer 1 is required</span>
+                <br>
+                <label><b>Question 2</b></label>
+                <input type="text" ng-model="question2" placeholder="Enter question 2" name="question2" required>
+                <span ng-show="registerForm.question2.$error.required">question 2 is required</span>
+                <br>
+                <label><b>Answer 2</b></label>
+                <input type="text" ng-model="answer2" placeholder="Enter answer 2" name="answer2" required>
+                <span ng-show="registerForm.answer2.$error.required">answer 2 is required</span>
+                <br>
+
+
+
+
+
+                <label><b>Category A</b></label>
+                <select ng-model="categoryA" ng-options="x for x in Categories"></select>
+                <span ng-show="registerForm.categoryA.$error.required">categoryA is required</span>
+                <br>
+                <label><b>Category B</b></label>
+                <select ng-model="categoryB" ng-options="x for x in Categories"></select>
+                <span ng-show="registerForm.categoryB.$error.required">categoryB is required</span>
+                <br>
+                <label><b>Category C</b></label>
+                <select ng-model="categoryC" ng-options="x for x in Categories"></select>
+                <span ng-show="registerForm.categoryC.$error.required">categoryC is required</span>
+                <button type="submit" ng-disabled="registerForm.userName.$invalid ||registerForm.city.$invalid || registerForm.password.$invalid ||registerForm.email.$invalid || registerForm.country.$invalid ||registerForm.address.$invalid ||registerForm.phone.$invalid
+         ||registerForm.firstName.$invalid ||registerForm.lastName.$invalid ||registerForm.cellular.$invalid ||registerForm.creditCardNumber.$invalid ||registerForm.favoriteTeam.$invalid ||registerForm.securityAnswer.$invalid" ng-click="register()">Submit</button>
+            </div>
+        </form>
+    </div>
+    <br>
+
+    <br>
+    <br>
+</div>

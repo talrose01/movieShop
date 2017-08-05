@@ -1,0 +1,55 @@
+<div class="OrdersReportCtrl-container" ng-controller="OrdersReportCtrl as OrdersReportCtrl" data-ng-init="OrdersReportCtrl.init();">
+<div class="tableR">
+    <div id="chhoseSup">
+   Choose Supplier:
+    <select name="supplier" ng-model="supplier" ng-change="OrdersReportCtrl.change()" ng-options="s.firstName+s.lastName for s in OrdersReportCtrl.suppliers"required>
+    </select>
+    </div>
+    <form id="reportForm" name="reportForm" class="form-horizontal" role="form" ng-submit="addRow()">
+        <label><b>Order Number: {{OrdersReportCtrl.orderId}} </b></label>
+        <br>
+
+        <br>
+        <label >Movie Name :</label>
+        <select name="movie" ng-model="movie" ng-options="m.movieName for m in OrdersReportCtrl.Movies" required>
+        </select>
+        <br>
+        Amount :
+        <input type="text" name="amount"  pattern="^[0-9]*$" id="amount" name="amount" ng-model="amount" required/>
+        <br>
+        <input type="submit" ng-disabled="reportForm.supplier.$invalid||reportForm.movie.$invalid||reportForm.amount.$invalid" value="Add To Report" class="btn btn-primary"/>
+        <br>
+    </form>
+
+</div>
+    <div class="tableF">
+
+    <table class="tablee" >
+        <tr>
+            <th class="tdd">Movie Id</th>
+            <th class="tdd">Movie Name</th>
+            <th class="tdd">Quantity</th>
+        </tr>
+        <tr ng-repeat="Order in Orders">
+            <td class="tdd">{{Order.movieId}}</td>
+            <td class="tdd">{{Order.movieName}}</td>
+            <td class="tdd">{{Order.amount}}</td>
+        </tr>
+    </table>
+        <br>
+        <button class="a" ng-click="OrdersReportCtrl.sendReport();">Send Report</button>
+
+        <button class="a" ng-click="OrdersReportCtrl.clear();">Clear Report</button>
+    </div>
+    <modal visible="OrdersReportCtrl.showDetails">
+    </modal>
+    <div id="detailModal"  ng-show="OrdersReportCtrl.showModal" class="modal1">
+        <div class="modal-content1">
+            <span class="close"  ng-click="OrdersReportCtrl.closeModal()">&times;</span>
+            <h2> {{OrdersReportCtrl.alert}}</h2>
+        </div>
+    </div>
+</div>
+
+
+

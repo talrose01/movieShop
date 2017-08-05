@@ -1,0 +1,93 @@
+<div class="addMovieCtrl-container" ng-controller="addMovieCtrl as addMovieCtrl" data-ng-init="addMovieCtrl.init();">
+    <div class="register-form" >
+        <p class="kotert">Please insert The Details in English:</p>
+<br>
+        <div>
+            <form id="directorForm" name="directorForm">
+
+
+            <label><b>In Case The Director Is Not At The Director List You Should Add Director:</b></label>
+                <br>
+                Director First Name:
+            <input type="text" pattern="[a-zA-Z]+" ng-model="DFirstName" placeholder="Director First Name" name="DFirstName" required>
+                <span ng-show="directorForm.DFirstName.$error.pattern || directorForm.DFirstName.$error.required">First Name Is Require (letters only)</span>
+                <br>
+            Director Last Name:
+            <input type="text" pattern="[a-zA-Z]+" ng-model="DLirstName" placeholder="Director Last Name" name="DLirstName" required>
+                <span ng-show="directorForm.DLirstName.$error.pattern || directorForm.DLirstName.$error.required">Last Name Is Require (letters only)</span>
+                <br>
+                <button  ng-disabled="directorForm.DFirstName.$invalid ||directorForm.DLirstName.$invalid"  ng-click="addMovieCtrl.addDirector()">Add Director</button>
+
+            </form>
+        </div>
+        <br>
+        <form id="registerForm" name="registerForm" >
+            <!--    <div class="imgcontainer">
+                    <img src="https://myslu.slu.edu/res/images/cas-padlock-icon.png" alt="loginImg" class="avatar">
+                </div>-->
+            <div class="container" >
+                <label><b>Movie Name</b></label>
+                <input type="text"  ng-model="movieName" placeholder="Enter Movie Name" name="movieName" required>
+                <span ng-show="registerForm.movieName.$error.required">Movie name is required</span>
+                <br>
+                <label><b>Directors Details</b></label>
+                <select name="director"  ng-model="director" ng-options="d.directorId as d.firstName+' '+ d.lastName for d in addMovieCtrl.directors " required></select>
+                <span ng-show="registerForm.director.$error.required">director is required</span>
+                <br>
+
+                <label><b>Description</b></label>
+                <input type="text" ng-model="description" placeholder="Enter description" name="description" required>
+                <span ng-show="registerForm.description.$error.required">Description is required</span>
+                <br>
+                <label><b>Price</b></label>
+                <input type="price" pattern="^[0-9]+$" ng-model="price" placeholder="Enter Price" name="price" required>
+                <span ng-show="registerForm.price.$error.pattern ||registerForm.price.$error.required">price is required . must be number</span>
+                <br>
+
+                <label><b>Published Year</b></label>
+                <input minlength="4" maxlength="4" type="publishedYear" pattern="^[0-9]+$" ng-model="publishedYear" placeholder="Enter Publishe dYear" name="publishedYear" required>
+                <span ng-show="registerForm.publishedYear.$error.pattern ||registerForm.publishedYear.$error.required">published Year is required YYYY format</span>
+                <br>
+
+
+                <label><b>stockAmount</b></label>
+                <input type="stockAmount" pattern="^[0-9]+$" placeholder="Enter StockAmount" ng-model="stockAmount" name="stockAmount" required>
+                <span ng-show="registerForm.stockAmount.$error.pattern || registerForm.stockAmount.$error.required ">stockAmount is required. must be number</span>
+                <br>
+
+                <label><b>Language</b></label>
+                <input type="text" ng-model="language" placeholder="Enter Language" name="language" required>
+                <span ng-show="registerForm.language.$error.required">Language is required</span>
+                <br>
+                picturePath
+                <label><b>Picture Path</b></label>
+                <input type="text" ng-model="picturePath" placeholder="Enter Picture Path" name="picturePath" required>
+                <span ng-show="registerForm.picturePath.$error.required">Picture Path is required as a/img deatails n(x.jpg)</span>
+                <br>
+
+                <label><b>category  </b></label>
+                <select  name="categoryId" ng-model="categoryId" ng-options="d.categoryId as d.categoryName for d in addMovieCtrl.categories "required></select>
+                <span ng-show="registerForm.categoryId.$error.required">category is required</span>
+                <br>
+             <!--   ctrl.addMovie-->
+                <button type="submit" ng-disabled="registerForm.movieName.$invalid ||registerForm.director.$invalid || registerForm.description.$invalid ||registerForm.price.$invalid || registerForm.publishedYear.$invalid ||registerForm.stockAmount.$invalid ||registerForm.language.$invalid
+         ||registerForm.picturePath.$invalid ||registerForm.categoryId.$invalid" ng-click="addMovieCtrl.addMovie()">Add Movie</button>
+
+            </div>
+        </form>
+        <br>
+        <br>
+        <br>
+    </div>
+    <modal visible="addMovieCtrl.showModal">
+    </modal>
+    <div id="detailModal"  ng-show="addMovieCtrl.showModal" class="modal1">
+        <div class="modal-content1">
+            <span class="close"  ng-click="addMovieCtrl.closeModal()">&times;</span>
+            <h2> {{addMovieCtrl.alert}}</h2>
+        </div>
+    </div>
+</div>
+
+
+

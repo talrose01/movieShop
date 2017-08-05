@@ -1,0 +1,161 @@
+
+<div  ng-controller="mainController as mainCtrl" data-ng-init="mainCtrl.homeInit();">
+
+
+    <div class="NewProducts" >
+        <p>Top 5 Products</p>
+    </div>
+    <div class="mpvieTable"  ng-repeat="p in getTopFive"  ng-if="$index % 3 == 0" class="row">
+        <table class="homeTable">
+            <tr>
+                <td>
+                    <table class="movieT">
+                        <tr class="baki">
+                            <td><button class="myBtn">{{getTopFive[$index].movieName}}</button>
+                                <p>Price:{{getTopFive[$index].price}}$</p>
+                                <p ng-show="mainCtrl.userService.isLoggedIn">Quantity:</p>
+
+                                <form name="registerForm" >
+                                    <input ng-show="mainCtrl.userService.isLoggedIn" id="quantity"  name="quantity" pattern="^[0-9]+$" ng-model="quantity" required> </input>
+                                </form>
+                                <br>
+                                <br>
+                                <button ng-disabled="registerForm.quantity.$invalid" ng-show="mainCtrl.userService.isLoggedIn" ng-click="mainCtrl.addToCart(getTopFive[$index].movieId,getTopFive[$index].movieName,quantity,getTopFive[$index].price,getTopFive[$index].language,getTopFive[$index].picturePath,getTopFive[$index].description);">add to cart</button>
+                            </td>
+                            <td>
+
+                                <img class="movieImg" ng-src="{{getTopFive[$index].picturePath}}">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table  ng-if="getTopFive.length > ($index + 1)" class="movieT">
+                        <tr class="baki">
+                            <td><button class="myBtn">{{getTopFive[$index+1].movieName}}</button>
+
+                                <p>Price:{{getTopFive[$index+1].price}}$</p>
+                                <p ng-show="mainCtrl.userService.isLoggedIn">Quantity:</p>
+                                <form name="registerForm" >
+                                    <input ng-show="mainCtrl.userService.isLoggedIn"   name="quantity" pattern="^[0-9]+$" ng-model="quantity" required> </input>
+                                </form>
+                                <br>
+                                <br>
+                                <button ng-disabled="registerForm.quantity.$invalid" ng-show="mainCtrl.userService.isLoggedIn" ng-click="mainCtrl.addToCart(getTopFive[$index+1].movieId,getTopFive[$index+1].movieName,quantity,getTopFive[$index+1].price,getTopFive[$index+1].language,getTopFive[$index+1].picturePath,getTopFive[$index+1].description);">add to cart</button>
+                            </td>
+                            <td>
+                                <img class="movieImg" ng-src="{{getTopFive[$index+1].picturePath}}">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table ng-if="getTopFive.length > ($index + 2)" class="movieT">
+                        <tr class="baki">
+                            <td><button class="myBtn">{{getTopFive[$index+2].movieName}}</button>
+
+                                <p>Price:{{getTopFive[$index+2].price}}$</p>
+                                <p ng-show="mainCtrl.userService.isLoggedIn">Quantity:</p>
+                                <form name="registerForm" >
+                                    <input ng-show="mainCtrl.userService.isLoggedIn"  name="quantity" pattern="^[0-9]+$" ng-model="quantity" required> </input>
+                                </form>
+                                <br>
+                                <br>
+                                <button ng-disabled="registerForm.quantity.$invalid" ng-show="mainCtrl.userService.isLoggedIn" ng-click="mainCtrl.addToCart(getTopFive[$index+2].movieId,getTopFive[$index+2].movieName,quantity,getTopFive[$index+2].price,getTopFive[$index+2].language,getTopFive[$index+2].picturePath,getTopFive[$index+2].description);">add to cart</button>
+                            </td>
+                            <td>
+                                <img class="movieImg" ng-src="{{getTopFive[$index+2].picturePath}}">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div ng-show="mainCtrl.userService.isLoggedIn">
+        <div class="NewProducts" >
+            <p> {{month}} added Movies</p>
+        </div>
+        <div class="mpvieTable" ng-show="mainCtrl.userService.isLoggedIn" ng-repeat="p in products"  ng-if="$index % 3 == 0" class="row">
+            <table class="homeTable">
+                <tr>
+                    <td>
+                        <table class="movieT">
+                            <tr class="baki">
+                                <td><button class="myBtn">{{products[$index].movieName}}</button>
+
+                                    <p>Price:{{products[$index].price}}$</p>
+                                    <br  ng-show="mainCtrl.userService.isLoggedIn">Quantity:
+                                    <form name="registerForm" >
+                                        <input    name="quantity" pattern="^[0-9]+$" ng-model="quantity" required> </input>
+                                    </form>
+                                    <br>
+                                    <br>
+                                    <button ng-disabled="registerForm.quantity.$invalid" ng-click="mainCtrl.addToCart(products[$index].movieId,products[$index].movieName,quantity,products[$index].price,products[$index].language,products[$index].picturePath,products[$index].description);">add to cart</button>
+
+                                </td>
+                                <td>
+                                    <img class="movieImg" ng-src="{{products[$index].picturePath}}">
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table ng-if="products.length > ($index + 1)" class="movieT">
+                            <tr class="baki">
+                                <td><button class="myBtn">{{products[$index+1].movieName}}</button>
+
+                                    <p>Price:{{products[$index+1].price}}$</p>
+                                    <br>Quantity:
+                                    <form name="registerForm" >
+                                        <input    name="quantity" pattern="^[0-9]+$" ng-model="quantity" required> </input>
+                                    </form>
+                                    <br>
+                                    <br>
+                                    <button ng-disabled="registerForm.quantity.$invalid" ng-click="mainCtrl.addToCart(products[$index+1].movieId,products[$index+1].movieName,quantity,products[$index+1].price,products[$index+1].language,products[$index+1].picturePath,products[$index+1].description);">add to cart</button>
+                                </td>
+                                <td>
+                                    <img class="movieImg" ng-src="{{products[$index+1].picturePath}}">
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table ng-if="products.length > ($index + 2)" class="movieT">
+                            <tr class="baki">
+                                <td><button class="myBtn">{{products[$index+2].movieName}}</button>
+
+                                    <p>Price:{{products[$index+2].price}}$</p>
+                                    <br>Quantity:
+                                    <form name="registerForm" >
+                                        <input    name="quantity" pattern="^[0-9]+$" ng-model="quantity" required> </input>
+                                    </form>
+                                    <br>
+                                    <br>
+                                    <button ng-disabled="registerForm.quantity.$invalid" ng-click="mainCtrl.addToCart(products[$index+2].movieId,products[$index+2].movieName,quantity,products[$index+2].price,products[$index+2].language,products[$index+2].picturePath,products[$index+2].description);">add to cart</button>
+                                </td>
+                                <td>
+                                    <img class="movieImg" ng-src="{{products[$index+2].picturePath}}">
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <modal id="detailModall" visible="registerCtrl.showDetails">
+        </modal>
+        <div id="detailModal"  ng-show="mainCtrl.showModal" class="modal1">
+            <div class="modal-content1">
+                <span class="close"  ng-click="mainCtrl.closeModal()">&times;</span>
+                <h2> {{mainCtrl.alert}}</h2>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+</div>
+
+

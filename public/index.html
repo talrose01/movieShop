@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>My Page</title>
+    <script src="angularScripts/angular.js"></script>
+    <script src="app.js"></script>
+    <script src="controllers/HomeController.js"></script>
+    <script src="controllers/LoginController.js"></script>
+    <script src="controllers/NewMovieController.js"></script>
+    <script src="controllers/CartController.js"></script>
+    <script src="controllers/RegisterController.js"></script>
+    <script src="controllers/ForgotPassController.js"></script>
+    <script src="controllers/ClientsController.js"></script>
+    <script src="controllers/moviesSController.js"></script>
+    <script src="controllers/addMovieController.js"></script>
+    <script src="controllers/OrdersReportController.js"></script>
+    <script type="text/javascript" src="angularScripts/angular-route.js"></script>
+    <script type="text/javascript" src="angularScripts/angular-local-storage.min.js"></script>
+    <!--  <script type="text/javascript" src="StorageExampleController.js"></script>-->
+    <script type="text/javascript" src="angularScripts/xml2json.js"></script>
+    <link rel="stylesheet" href
+            ="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+</head>
+<body  ng-controller="mainController as mainCtrl" data-ng-init="mainCtrl.loginInit();">
+<div ng-controller="mainController as mainCtrl">
+    <img id="imgA" src="a/popcorn.png" height="30" width="30" >
+    <img id="imgB" src="a/popcorn.png" height="30" width="30" >
+
+    <!-- <img id="cartImg" ng-href="#/cart" ng-hide="mainCtrl.userService.isLoggedIn" src="a/cart.png" height="30" width="30" >
+    --> <div>
+    <a ng-show="mainCtrl.userService.isLoggedIn" href="#/cart">
+        <img id="cartImg" src="a/cart.png"  width="200" height="200" ng-show="mainCtrl.userService.isLoggedIn">
+    </a>
+    <p id="head">Welcome To MoviesShop</p>
+    <p  class="headi">hello {{mainCtrl.userService.userName}}</p>
+
+</div>
+
+
+    <nav id="navAbout">
+        <a class="ref" ng-href="#/" >Home</a>
+        <a class="ref" ng-href="#/login" ng-hide="mainCtrl.userService.isLoggedIn">Login</a>
+        <a class="ref" ng-href="#/register" ng-hide="mainCtrl.userService.isLoggedIn">Register</a>
+
+        <a class="ref" ng-href="#/movies" ng-show="mainCtrl.userService.isLoggedIn">Movies</a>
+        <button class="myBtn" id="myBtn">Open Modal</button>
+        <a class="ref" ng-href="#/Clients" ng-show="mainCtrl.userService.isAdmin" >Clients </a>
+        <a class="ref" ng-href="#/NewClients" ng-show="mainCtrl.userService.isAdmin" >Add Clients </a>
+        <a class="ref" ng-href="#/moviesS" ng-show="mainCtrl.userService.isAdmin" >Movies Stock </a>
+        <a class="ref" ng-href="#/addMovie" ng-show="mainCtrl.userService.isAdmin" >Add Movie </a>
+        <a class="ref" ng-href="#/OrdersReport" ng-show="mainCtrl.userService.isAdmin" >Orders Report </a>
+        <button class="myBtn" ng-click="mainCtrl.logout()" ng-show="mainCtrl.userService.isLoggedIn">Logout</button>
+    </nav>
+    <div id="Bstars">
+    </div>
+    <div id="stars">
+    </div>
+
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div id="aboutM" class="modal-content">
+            <span class="close">&times;</span>
+            <img  id="modalImg" src="a/popcorn.png" height="30" width="30" >
+            <h2>Welcome To movieShop!</h2>
+            <p>,הגעתם לחנות הסרטים הוירטואלית של טל רוזנצוייג והילה ירקוני. סטודנטיות להנדסת מערכות מידע שנה שלישית </p>
+            <p> :וממומחיות בתחום הסרטים ועיצוב האתרים ולהלן הדוגמאות הקיימות לעיצובים שלנו </p>
+            <p>https://talr.000webhostapp.com אתרים אישיים: טל רוזנצוייג  </p>
+            <p>https://hilayarkoni.000webhostapp.com  הילה ירקוני  </p>
+            <p>https://pacmanhilatal.000webhostapp.com/index.htm - משחק הפקמן  </p>
+            <p>:במהלך בניית האתר נתקלנו במספר קשיים כגון </p>
+            <p>לסנכרן בין פרוייקט השרת שבנינו לפרוייקט הלקוח, כלומר להתאים  </p>
+            <p>.את ממשק הלקוח לממשק שכבר בנינו ולשנות אותו בהתאמה, לפי צרכים שהתגלו במהלך בניית האתר   </p>
+
+            <p>כמו כן, מכיוון שזהו פרוייקט גדול, ישנו צורך לעבוד בצורה מאד מסודרת ולהיות עקבי, על מנת להמנע מבאגים שעתידים להיות </p>
+            <p> ועל כן צריך סנכרון טוב ביננו. למרות הקשיים נהנו מאד מעבודה זו, ולראיה אתר הסרטים שלנו </p>
+
+        </div>
+
+    </div>
+
+</div>
+<div id="footer">
+    <p> C Tal Rosentzweig & Hila Yarkoni </p>
+
+</div>
+<br>
+<br>
+<ng-view></ng-view>
+<script>
+    // Get the modal
+    var modal = document.getElementById('myModal');
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+
+</body>
+
+
+</html>

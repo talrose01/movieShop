@@ -1,0 +1,55 @@
+<div class="moviesS-CONTAINER" ng-controller="moviesSCtrl as moviesSCtrl" data-ng-init="moviesSCtrl.getMoviesDetails();">
+
+        <br>
+        <br>
+        </span>
+        <table name="moviesTable"border="1" width="100%">
+            <tr class="TableL">
+                <th ng-click="orderByMe('movieName')">Movie Name</th>
+                <th ng-click="orderByMe('movieId')">Movie ID</th>
+                <th ng-click="orderByMe('categoryName')">Category</th>
+                <th ng-click="orderByMe('price')">Price</th>
+                <th ng-click="orderByMe('publishedYear')">Published Year</th>
+                <th ng-click="orderByMe('firstName')">Director First Name</th>
+                <th ng-click="orderByMe('lastName')">Director Last Name</th>
+                <th ng-click="orderByMe('stockAmount')">Stock Amount</th>
+                <th ng-click="orderByMe('description')">Description</th>
+                <th ng-click="orderByMe('language')">Language</th>
+                <th ng-click="orderByMe('picturePath')">picture Path</th>
+                <th ng-click="orderByMe('addedDate')">Added Date</th>
+                <th >Picture Movie</th>
+                <th >Remove Movie</th>
+                <th >Fill Movie Stock </th>
+            </tr>
+
+            <tr ng-repeat="x in moviesSCtrl.products | filter:test | orderBy:myOrderBy">
+                <td id="movieN"ng-class="{'color-red': x.stockAmount < 4 }"> {{x.movieName}}</td>
+                <td ng-class="{'color-red': x.stockAmount < 4 }"> {{x.movieId}}</td>
+                <td ng-class="{'color-red': x.stockAmount < 4 }"> {{x.categoryName}} </td>
+                <td ng-class="{'color-red': x.stockAmount < 4 }">{{x.price}}</td>
+                <td ng-class="{'color-red': x.stockAmount < 4 }">{{x.publishedYear}}</td>
+                <td ng-class="{'color-red': x.stockAmount < 4 }">{{x.firstName}}</td>
+                <td ng-class="{'color-red': x.stockAmount < 4 }">{{x.lastName}}</td>
+                <td ng-class="{'color-red': x.stockAmount < 4 }">{{x.stockAmount}}</td>
+                <td ng-class="{'color-red': x.stockAmount < 4 }">{{x.description}}</td>
+                <td ng-class="{'color-red': x.stockAmount < 4 }">{{x.language}}</td>
+                <td ng-class="{'color-red': x.stockAmount < 4 }">{{x.picturePath}}</td>
+                <td ng-class="{'color-red': x.stockAmount < 4 }">{{x.addedDate.substring(0,10)}}</td>
+                <td ng-class="{'color-red': x.stockAmount < 4 }">  <img class="movieImg" ng-src="{{x.picturePath}}" ></td>
+                <td ng-class="{'color-red': x.stockAmount < 4 }"><button  ng-click="moviesSCtrl.removeMovie(x.movieId);">Remove Movie</button></td>
+                <td ng-class="{'color-red': x.stockAmount < 4 }">
+                    <div>Enter quantity to Add:
+                        <form name="registerForm" >
+                        <input id="stockAdd"  name="stockAdd" pattern="^[0-9]+$" ng-model="stockAdd" required> </input>
+                        <button ng-disabled="registerForm.stockAdd.$invalid" ng-click="moviesSCtrl.fillMovie(x.movieId,stockAdd);">Fill Movie Stock</button>
+                        </form>
+                    </div>
+                </td>
+
+            </tr>
+        </table>
+    <br>
+
+    <br>
+    <br>
+    </div>

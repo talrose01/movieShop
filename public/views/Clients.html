@@ -1,0 +1,50 @@
+
+<div class="clients-container" ng-controller="ClientsController as ClientsController" data-ng-init="ClientsController.init();" >
+
+    <table  name="clientsTable"border="1" width="100%">
+        <tr class="TableL">
+            <th ng-click="orderByMe('UserName')">User Name</th>
+            <th ng-click="orderByMe('password')">Password</th>
+            <th ng-click="orderByMe('firstName')">First Name</th>
+            <th ng-click="orderByMe('lastName')">Last Name</th>
+            <th ng-click="orderByMe('adress')">Adress</th>
+            <th ng-click="orderByMe('city')">City</th>
+            <th ng-click="orderByMe('country')">country</th>
+            <th ng-click="orderByMe('phone')">Phone</th>
+            <th ng-click="orderByMe('Mail')">Mail</th>
+            <th ng-click="orderByMe('adress')">Adress</th>
+            <th ng-click="orderByMe('creditCardNumber')">Credit Card Number</th>
+            <th ng-click="orderByMe('LastLogin')">Last Login</th>
+            <th >Remove Client</th>
+        </tr>
+
+        <tr ng-repeat="x in ClientsController.cliensList | filter:test | orderBy:myOrderBy">
+            <td id="movieN"> {{x.UserName}}</td>
+            <td> {{x.password}} </td>
+            <td> {{x.firstName}}</td>
+            <td> {{x.lastName}} </td>
+            <td> {{x.adress}}</td>
+            <td> {{x.city}} </td>
+            <td> {{x.country}} </td>
+            <td> {{x.phone}} </td>
+            <td>{{x.Mail}}</td>
+            <td>{{x.adress}}</td>
+            <td>{{x.creditCardNumber}}</td>
+            <td>{{x.LastLogin}}</td>
+           <td><button  ng-click="ClientsController.removeClient(x.UserName);">Remove Client</button></td>
+        </tr>
+    </table>
+
+<br>
+    <br>
+    <br>
+
+</div>
+
+
+
+
+
+
+
+

@@ -1,0 +1,156 @@
+
+<div class="cartController-container" ng-controller="cartController as cartController">
+    <div id="orders">
+        Your Amount Of The Cart Is:{{ myFieldLabel }} $
+        <button class="ordersB" ng-click="cartController.showPrevious();">Previous Orders</button>
+
+         <button class="ordersB" ng-show="myFieldLabel!=0" ng-click="cartController.buyCart();">buy cart</button>
+    </div>
+<!--    class="mpvieTable"-->
+    <div  ng-repeat="p in cartController.products "  ng-if="$index % 3 == 0" class="row">
+        <table class="homeTable">
+            <tr>
+                <td>
+                    <table ng-click="cartController.showMovieDetail(cartController.products[$index])" class="movieT">
+                        <tr class="baki">
+                            <td><button class="myBtn">{{cartController.products[$index].movieName}}</button>
+                                <p>Laguage:{{cartController.products[$index].language}}</p>
+                                <p>Price:{{cartController.products[$index].price}}$</p>
+                                <br>
+                                <p>Quantity:{{cartController.products[$index].quantity}}</p>
+                                <br>
+                                <br>
+                                <button ng-click="cartController.removeMovie(cartController.products[$index].movieId,cartController.products[$index].movieId);">remove</button>
+                            </td>
+                            <td>
+                                <img class="movieImg" ng-src="{{cartController.products[$index].picturePath}}">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table ng-click="cartController.showMovieDetail(cartController.products[$index+1])" ng-if="cartController.products.length > ($index + 1)"  class="movieT">
+                        <tr class="baki">
+                            <td><button class="myBtn">{{cartController.products[$index+1].movieName}}</button>
+                                <p>Laguage:{{cartController.products[$index+1].language}}</p>
+                                <p>Price:{{cartController.products[$index+1].price}}$</p>
+                                <br>
+                                <p>Quantity:{{cartController.products[$index+1].quantity}}</p>
+                                <br>
+                                <br>
+                                <button ng-click="cartController.removeMovie(cartController.products[$index+1].movieId,cartController.products[$index+1].movieId);">remove</button>
+                            </td>
+                            <td>
+                                <img class="movieImg" ng-src="{{cartController.products[$index+1].picturePath}}">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table ng-click="cartController.showMovieDetail(cartController.products[$index+2])" ng-if="cartController.products.length > ($index + 2)" class="movieT">
+                        <tr class="baki">
+                            <td><button class="myBtn">{{cartController.products[$index+2].movieName}}</button>
+
+                                <p>Price:{{cartController.products[$index+2].price}}$</p>
+                                <br>
+                                <p>Quantity:{{cartController.products[$index+2].quantity}}</p>
+                                <br>
+                                <br>
+                                <button ng-click="cartController.removeMovie(cartController.products[$index+2].movieId,cartController.products[$index+2].movieId);">remove</button>
+                            </td>
+                            <td>
+                                <img class="movieImg" ng-src="{{cartController.products[$index+2].picturePath}}">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <br>
+    <br>
+    <modal visible="cartController.showModal">
+    </modal>
+    <div id="myModal"  ng-show="cartController.showModal" class="modal1">
+        <div class="modal-content2">
+        <span class="close"  ng-click="cartController.closeModal()">&times;</span>
+            <h2>Previos Orders</h2>
+        <table  name="moviesTable"border="1" width="100%">
+            <tr>
+                <th >Order Id</th>
+                <th >order Date</th>
+                <th >shipment Date</th>
+                <th >Dollar</th>
+                <th >total Price in Dollar</th>
+                <th >total Price in Shekel</th>
+                <th> See More</th>
+            </tr>
+
+            <tr ng-repeat="p in cartController.prevOrders">
+                <td> {{p.orderId}}</td>
+                <td> {{p.orderDate.substring(0,10)}} </td>
+                <td>{{p.shipmentDate.substring(0,10)}}</td>
+                <td>{{p.Dollar}}</td>
+                <td>{{p.totalPrice/p.Dollar}}</td>
+                <td>{{p.totalPrice}}</td>
+                <td><button ng-click="cartController.showDetails(p.orderId);">Movies Details</button></td>
+  </tr>
+        </table>
+        </div>
+    </div>
+<!--s***********************************************************************sd-->
+    <modal visible="cartController.showDetailsModal">
+    </modal>
+    <div id="detailModal"  ng-show="cartController.showDetailsModal" class="modal1">
+        <div class="modal-content1">
+            <span class="close"  ng-click="cartController.closeModalDetails()">&times;</span>
+            <h2>Order number: {{cartController.currentOrder}}</h2>
+            <table name="moviesTable"border="1" width="100%">
+                <tr>
+                    <th >Movie Name</th>
+                    <th >Amount</th>
+                    <th >Movie Price</th>
+                </tr>
+
+                <tr ng-repeat="p in cartController.details">
+                    <td> {{p.movieName}}</td>
+                    <td>{{p.amount}}</td>
+                    <td>{{p.price}}</td>
+                </tr>
+            </table>
+        </div>
+        <br>
+
+        <br>
+        <br>
+    </div>
+    <!--s***********************************************************************sd-->
+    <modal visible="cartController.movieDetail">
+    </modal>
+    <div id="movieDetail"  ng-show="cartController.movieDetail" class="modal1">
+        <div class="modal-content1">
+            <span class="close"  ng-click="cartController.closeMovieDetail()">&times;</span>
+            <h2> Movie Name: {{cartController.movieDetailList.movieName}}</h2>
+           <p>Language: {{cartController.movieDetailList.language}}</p>
+            <p>Price : {{cartController.movieDetailList.price/cartController.movieDetailList.quantity}}$</p>
+            <p>Description: {{cartController.movieDetailList.description}}</p>
+
+        </div>
+    </div>
+    <!--s***********************************************************************sd-->
+    <modal visible="cartController.NotPrevious">
+    </modal>
+    <div   ng-show="cartController.NotPrevious" class="modal1">
+        <div class="modal-content2">
+            <span class="close"  ng-click="cartController.closeModalNot()">&times;</span>
+            <h2> There is no previous orders!</h2>
+<br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
+
+</div>

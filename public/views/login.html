@@ -1,0 +1,30 @@
+<div class="login-container" ng-controller="loginController as loginCtrl">
+    <div class="login-form" >
+        <form name="loginForm" ng-submit="loginCtrl.login(loginForm.$valid,loginCtrl.user.username,loginCtrl.user.password)" novalidate>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text"  ng-model="loginCtrl.user.username"  class="form-control" name="usernameInput" placeholder="Enter Username" required>
+               <!-- <p ng-show="loginForm.usernameInput.$invalid" class="help-block">username is required</p>
+               --> <span ng-show="loginForm.usernameInput.$dirty && loginForm.usernameInput.$error.required" class="help-block">Username is required</span>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password"  ng-model="loginCtrl.user.password" class="form-control" name="passwordInput" placeholder="Enter Password" required>
+               <!-- <p ng-show=" !loginForm.passwordInput.$invalid " class="help-block">Password
+                    is required</p>-->
+                <span ng-show="loginForm.passwordInput.$dirty && loginForm.passwordInput.$error.required" class="help-block">Password is required</span>
+            </div>
+
+            <input type="submit" class="btn btn-success btn-lg" value="Login" ng-disabled="loginForm.$invalid">
+        </form>
+<!--        <div>
+            {{loginCtrl.errorMessage}}
+        </div>-->
+        <div >
+            <a ng-href="#/forgotPassword">Forgot Your Password??</a>
+        </div>
+    </div>
+
+</div>
+
+</div>

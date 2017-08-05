@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <title>Title</title>
+</head>
+<body>
+<div class="cartController-container" ng-controller="cartController as cartController">
+    <div ng-repeat="p in cartController.products " class="productBox">
+
+        <button id="myBtn"><h2>{{p.movieName}}</h2></button>
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <br>
+                Language:
+                <h3>{{p.language}}</h3>
+                Quantity:
+                <h4>{{p.quantity}}</h4>
+                Price:
+                <h5>{{p.price}}</h5></p>
+            </div>
+
+        </div>
+    </div>
+    <p>Your Amount Is:</p>
+    <label for="MyField">{{ myFieldLabel }}</label>
+    <button ng-click="cartController.buyCart();">buy cart</button>
+    <modal visible="cartController.showModal">
+    </modal>
+</div>
+<script>
+    // Get the modal
+    var modal = document.getElementById('myModal');
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+</body>
+</html>
